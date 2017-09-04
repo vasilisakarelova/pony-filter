@@ -1,0 +1,33 @@
+.product-wrap,
+.filter {
+  position: relative;
+  display: flex;
+  margin: 0 auto;
+  width: 70vw;
+  max-width: 860px;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+
+.product {
+  display: block;
+  text-transform: capitalize;
+
+  &_block {
+    position: flex;
+    flex-direction: column;
+    width: 35%;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  &_img {
+    position: relative;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+  }
+}
