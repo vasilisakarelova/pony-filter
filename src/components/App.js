@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import Pony from './Pony'
+import Filter from './Filter'
 import db from './db'
 
 export default class extends Component {
@@ -15,10 +16,12 @@ export default class extends Component {
 
     return (
       <div className='main-container'>
-        <div className='filter'></div>
+        <div className='filter'>
+          <Filter />
+        </div>
         <div className='product-wrap'>
           { ponies.map( (found, i) => (
-            <Pony key={i} db={found} photo={found.photo} />
+            <Pony key={i} db={found} photo={found.photo} id={i}/>
           ) ) }
         </div>
       </div>

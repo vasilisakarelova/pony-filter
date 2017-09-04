@@ -3,15 +3,15 @@ export default {
       {
         name: 'Твайлайт',
         color: 'Фиолетовый',
-        kind: 'Единорог',
-        price: 20,
+        kind: 'Земная пони',
+        price: 10,
         is_new: true,
         photo: 'assets/pony-twilight-flash.jpg'
       },
       {
         name: 'Рарити',
-        color: 'Единорог',
-        kind: 'синий',
+        color: 'синий',
+        kind: 'Единорог',
         price: 20,
         is_new: true,
         photo: 'assets/pony-rariti.jpg'
@@ -20,17 +20,25 @@ export default {
         name: 'Флаттершай',
         color: 'желтый',
         kind: 'пони',
-        price: 20,
+        price: 21,
         is_new: true,
         photo: 'assets/pony-flattershy.jpg'
       },
       {
         name: 'Пинки Пай',
         color: 'розовый',
-        kind: 'пони',
+        kind: 'пегас',
         price: 20,
-        is_new: true,
+        is_new: false,
         photo: 'assets/pony-pinky-pie.jpg'
+      },
+      {
+        name: 'Рарити Белая',
+        color: 'Белый',
+        kind: 'Единорог',
+        price: 100,
+        is_new: true,
+        photo: 'assets/pony-rariti-unicorn.jpg'
       }
     ]
   }
