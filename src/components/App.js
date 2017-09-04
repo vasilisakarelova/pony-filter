@@ -8,16 +8,38 @@ export default class extends Component {
   constructor(props) {
     super(props)
 
-    this.state = db
+    this.handlePriceChange = this.handlePriceChange.bind(this)
+    this.handleOptionChange = this.handlePriceChange.bind(this)
+
+    this.state = {
+      db,
+      color: null,
+      kind: null,
+      price: { min: 20, max: 100 },
+      isNew: null
+    }
+  }
+
+  handleOptionChange(ev) {
+    console.log(ev)
+    this.setState({
+      isNew: ev.target.value
+    })
+  }
+
+  handlePriceChange(value) {
+    this.setState({
+      price: value
+    })
   }
 
   render() {
-    const { ponies } = this.state
+    const { ponies } = this.state.db
 
     return (
       <div className='main-container'>
         <div className='filter'>
-          <Filter />
+          <Filter handlePriceChange={this.handlePriceChange} inputRef={el => this.inputElement = el} handleOptionChange={this.handleOptionChange} state={this.state}/>
         </div>
         <div className='product-wrap'>
           { ponies.map( (found, i) => (

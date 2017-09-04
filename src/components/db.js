@@ -1,6 +1,7 @@
 export default {
     ponies: [
       {
+        id: 0,
         name: 'Твайлайт',
         color: 'Фиолетовый',
         kind: 'Земная пони',
@@ -9,6 +10,7 @@ export default {
         photo: 'assets/pony-twilight-flash.jpg'
       },
       {
+        id: 1,
         name: 'Рарити',
         color: 'синий',
         kind: 'Единорог',
@@ -17,6 +19,7 @@ export default {
         photo: 'assets/pony-rariti.jpg'
       },
       {
+        id: 2,
         name: 'Флаттершай',
         color: 'желтый',
         kind: 'пони',
@@ -25,6 +28,7 @@ export default {
         photo: 'assets/pony-flattershy.jpg'
       },
       {
+        id: 3,
         name: 'Пинки Пай',
         color: 'розовый',
         kind: 'пегас',
@@ -33,6 +37,7 @@ export default {
         photo: 'assets/pony-pinky-pie.jpg'
       },
       {
+        id: 4,
         name: 'Рарити Белая',
         color: 'Белый',
         kind: 'Единорог',

@@ -9,30 +9,11 @@ export default class extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      color: null,
-      kind: null,
-      value: { min: 2, max: 10 },
-      isNew: null
-    }
-  }
-
-  handleOptionChange(ev) {
-    this.setState({
-      isNew: ev.target.value
-    })
-  }
-
-  handlePriceChange(ev) {
-    this.setState({
-      price: ev.target.value
-    })
+    this.state = props.state
   }
 
   render() {
-    const colors = db.ponies.map((pony,i) => <option value={pony.id} key={i}>{pony.color}</option>)
-    //const prices = db.ponies.map((pony,i) => <span style={{paddingRight: '10px'}} key={i}>{pony.price}</span>)
-    //const isNew = db.ponies.map((pony,i) => (pony.is_new) ? <span style={{paddingRight: '10px'}} key={i}>новый</span> : <span style={{paddingRight: '10px'}} key={i}>старый</span>)
+    const colors = db.ponies.map((pony,i) => <option value={pony.id} key={i} >{pony.color}</option>)
     const kinds = db.ponies.map((pony,i) => (
       <span className="control-col" key={i}>
         <label className="control">
@@ -41,6 +22,11 @@ export default class extends Component {
         </label>
       </span>
     ))
+
+    const colorsFilter = db.ponies.map((pony,i) => ({ ID: pony.id, filter: pony.color }))
+    const kindsFilter = db.ponies.map((pony,i) => ({ ID: pony.id, filter: pony.kind }))
+    const pricesFilter = db.ponies.map((pony,i) => ({ ID: pony.id, filter: pony.price }))
+    const isNewFilter = db.ponies.map((pony,i) => ({ ID: pony.id, filter: pony.is_new }))
 
     return (
       <div className='filter_blocks'>
@@ -63,23 +49,23 @@ export default class extends Component {
           <div className='col'>
             <div className='mb-20'>
               <InputRange
-                maxValue={200}
+                maxValue={220}
                 minValue={0}
-                value={this.state.value}
-                onChange={value => this.setState({ value })} />
+                value={this.state.price}
+                onChange={this.props.handlePriceChange} />
             </div>
           </div>
           <div className='col'>
             <div className='mb-20'>
               <span className='control-col'>
                 <label className='control'>
-                  <input type='radio' name='isNew' value='true' checked={this.state.isNew === 'true'} onChange={this.handleOptionChange.bind(this)} />
+                  <input type='radio' name='isNew' value='true' onChange={this.props.handleOptionChange} />
                   <span className='control-label'>новая</span>
                 </label>
               </span>
               <span className='control-col'>
                 <label className='control'>
-                  <input type='radio' name='isNew' value='false' checked={this.state.isNew === 'false'} onChange={this.handleOptionChange.bind(this)} />
+                  <input type='radio' name='isNew' value='false' onChange={this.props.handleOptionChange} />
                   <span className='control-label'>старая</span>
                 </label>
               </span>
