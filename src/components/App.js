@@ -7,45 +7,87 @@ import db from './db'
 export default class extends Component {
   constructor(props) {
     super(props)
-
-    this.handlePriceChange = this.handlePriceChange.bind(this)
-    this.handleOptionChange = this.handlePriceChange.bind(this)
-
     this.state = {
-      db,
       color: null,
       kind: null,
-      price: { min: 20, max: 100 },
+      price: { min: 0, max: 110 },
       isNew: null
     }
+
+    this.ponies = db.ponies
+    this.result = []
+
+    this.priceFilter = this.priceFilter.bind(this)
+    this.colorFilter = this.colorFilter.bind(this)
+    this.kindFilter = this.kindFilter.bind(this)
+    this.isNewFilter = this.isNewFilter.bind(this)
   }
 
-  handleOptionChange(ev) {
-    console.log(ev)
-    this.setState({
-      isNew: ev.target.value
+  priceFilter(price) {
+    this.setState({ price })
+
+    this.ponies.map( obj => {
+      if(obj.price >= price.min && obj.price <= price.max) {
+        this.result.push(obj.id)
+      } else {
+        this.result = this.result.filter(item => item !== obj.id)
+      }
     })
   }
 
-  handlePriceChange(value) {
-    this.setState({
-      price: value
+  colorFilter(color) {
+    this.setState({ color })
+
+    this.ponies.map( obj => {
+      if (obj.color === color) {
+        this.result.push(obj.id)
+      } else {
+        this.result = this.result.filter(item => item !== obj.id)
+      }
+    })
+  }
+
+  kindFilter(kind) {
+    this.setState({ kind })
+
+    this.ponies.map( obj => {
+      if (kind.indexOf(obj.kind) > -1) {
+        this.result.push(obj.id)
+      } else {
+        this.result = this.result.filter(item => item !== obj.id)
+      }
+    })
+  }
+
+  isNewFilter(isNew) {
+    this.setState({ isNew })
+
+    this.ponies.map( obj => {
+      if (obj.isNew === isNew) {
+        this.result.push(obj.id)
+      } else {
+        this.result = this.result.filter(item => item !== obj.id)
+      }
+    })
+  }
+
+  componentWillUpdate() {
+    this.ponies.map( obj => {
+      if (this.result.indexOf(obj.id) > -1) {
+        obj.isHidden = false
+      } else {
+        obj.isHidden = true
+      }
     })
   }
 
   render() {
-    const { ponies } = this.state.db
-
     return (
       <div className='main-container'>
         <div className='filter'>
-          <Filter handlePriceChange={this.handlePriceChange} inputRef={el => this.inputElement = el} handleOptionChange={this.handleOptionChange} state={this.state}/>
+          <Filter ref='filter' stateDb={this.state} onSelectColor={this.colorFilter} onSelectKind={this.kindFilter} onSelectPrice={this.priceFilter}  onisNewFilter={this.isNewFilter} />
         </div>
-        <div className='product-wrap'>
-          { ponies.map( (found, i) => (
-            <Pony key={i} db={found} photo={found.photo} id={i}/>
-          ) ) }
-        </div>
+        <Pony db={this.ponies} />
       </div>
     )
   }

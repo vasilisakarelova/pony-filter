@@ -8,32 +8,52 @@ import db from './db'
 export default class extends Component {
   constructor(props) {
     super(props)
+  }
 
-    this.state = props.state
+  kindFilter(ev) {
+    this.kindArr = []
+    document.querySelectorAll('input[name="kind"]:checked').forEach((el) => {
+      this.kindArr.push(el.value)
+    })
+
+    this.setState({ kind: this.kindArr })
+    this.props.onSelectKind(this.kindArr)
+  }
+
+  colorFilter() {
+    const color = this.refs.dropdown.value
+    this.setState({ color: color })
+    this.props.onSelectColor(color)
+  }
+
+  priceFilter(value) {
+    const price = value
+    this.props.onSelectPrice(price)
+  }
+
+  isNewFilter(val) {
+    this.props.onisNewFilter(val)
   }
 
   render() {
-    const colors = db.ponies.map((pony,i) => <option value={pony.id} key={i} >{pony.color}</option>)
-    const kinds = db.ponies.map((pony,i) => (
+    const colors = db.ponies.map((pony,i) => <option value={pony.color} key={i} >{pony.color}</option>)
+
+    const kindsUnique = [...new Set(db.ponies.map(item => item.kind))]
+    const kinds = kindsUnique.map((pony,i) => (
       <span className="control-col" key={i}>
         <label className="control">
-          <input type="checkbox" />
-          <span style={{paddingRight: '10px'}} key={i}>{pony.kind}</span>
+          <input type="checkbox" name='kind' value={pony} onClick={this.kindFilter.bind(this)} />
+          <span style={{paddingRight: '10px'}} key={i}>{pony}</span>
         </label>
       </span>
     ))
-
-    const colorsFilter = db.ponies.map((pony,i) => ({ ID: pony.id, filter: pony.color }))
-    const kindsFilter = db.ponies.map((pony,i) => ({ ID: pony.id, filter: pony.kind }))
-    const pricesFilter = db.ponies.map((pony,i) => ({ ID: pony.id, filter: pony.price }))
-    const isNewFilter = db.ponies.map((pony,i) => ({ ID: pony.id, filter: pony.is_new }))
 
     return (
       <div className='filter_blocks'>
         <div className='row'>
           <div className='col'>
             <div className='mb-20'>
-              <select>
+              <select ref='dropdown' onChange={this.colorFilter.bind(this)}>
                 {colors}
               </select>
               <div className='select__arrow'></div>
@@ -49,23 +69,23 @@ export default class extends Component {
           <div className='col'>
             <div className='mb-20'>
               <InputRange
-                maxValue={220}
+                maxValue={150}
                 minValue={0}
-                value={this.state.price}
-                onChange={this.props.handlePriceChange} />
+                value={this.props.stateDb.price}
+                onChange={this.priceFilter.bind(this)} />
             </div>
           </div>
           <div className='col'>
             <div className='mb-20'>
               <span className='control-col'>
                 <label className='control'>
-                  <input type='radio' name='isNew' value='true' onChange={this.props.handleOptionChange} />
+                  <input type='radio' name='isNew' value='true' checked={this.props.stateDb.isNew === true} onChange={(ev) => this.isNewFilter(true)} />
                   <span className='control-label'>новая</span>
                 </label>
               </span>
               <span className='control-col'>
                 <label className='control'>
-                  <input type='radio' name='isNew' value='false' onChange={this.props.handleOptionChange} />
+                  <input type='radio' name='isNew' value='false' checked={this.props.stateDb.isNew === false} onChange={(ev) => this.isNewFilter(false)} />
                   <span className='control-label'>старая</span>
                 </label>
               </span>

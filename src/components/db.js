@@ -2,48 +2,53 @@ export default {
     ponies: [
       {
         id: 0,
-        name: 'Твайлайт',
-        color: 'Фиолетовый',
-        kind: 'Земная пони',
+        name: 'твайлайт',
+        color: 'фиолетовый',
+        kind: 'земная пони',
         price: 10,
-        is_new: true,
-        photo: 'assets/pony-twilight-flash.jpg'
+        isNew: true,
+        photo: 'assets/pony-twilight-flash.jpg',
+        isHidden: false
       },
       {
         id: 1,
-        name: 'Рарити',
+        name: 'рарити',
         color: 'синий',
-        kind: 'Единорог',
+        kind: 'eдинорог',
         price: 20,
-        is_new: true,
-        photo: 'assets/pony-rariti.jpg'
+        isNew: true,
+        photo: 'assets/pony-rariti.jpg',
+        isHidden: false
       },
       {
         id: 2,
-        name: 'Флаттершай',
+        name: 'флаттершай',
         color: 'желтый',
         kind: 'пони',
         price: 21,
-        is_new: true,
-        photo: 'assets/pony-flattershy.jpg'
+        isNew: true,
+        photo: 'assets/pony-flattershy.jpg',
+        isHidden: false
       },
       {
         id: 3,
-        name: 'Пинки Пай',
+        name: 'пинки пай',
         color: 'розовый',
         kind: 'пегас',
         price: 20,
-        is_new: false,
-        photo: 'assets/pony-pinky-pie.jpg'
+        isNew: false,
+        photo: 'assets/pony-pinky-pie.jpg',
+        isHidden: false
       },
       {
         id: 4,
-        name: 'Рарити Белая',
-        color: 'Белый',
-        kind: 'Единорог',
+        name: 'рарити белая',
+        color: 'белый',
+        kind: 'eдинорог',
         price: 100,
-        is_new: true,
-        photo: 'assets/pony-rariti-unicorn.jpg'
+        isNew: true,
+        photo: 'assets/pony-rariti-unicorn.jpg',
+        isHidden: false
       }
     ]
   }

@@ -36,3 +36,7 @@
     height: auto;
   }
 }
+
+.is_hidden {
+  display: none;
+}

@@ -350,6 +350,10 @@ section {
     height: auto;
   }
 
+.is_hidden {
+  display: none;
+}
+
 select {
   display: inline-block;
   position: relative;
